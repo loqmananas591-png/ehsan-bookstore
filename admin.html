@@ -1,0 +1,1394 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>پنل مدیریت | کتاب احسان کابل</title>
+<link rel="icon" href="images/logo.png">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+    font-family:Vazirmatn,sans-serif;
+    background:#f2f5f3;
+    color:#26372e;
+}
+
+button,input,select{font:inherit}
+button{cursor:pointer}
+
+.login-screen{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    background:linear-gradient(135deg,#103b2b,#287453);
+}
+
+.login-box{
+    width:100%;
+    max-width:400px;
+    background:white;
+    border-radius:20px;
+    padding:35px;
+    box-shadow:0 20px 60px #0003;
+    text-align:center;
+}
+
+.login-box img{
+    width:90px;
+    height:90px;
+    object-fit:contain;
+    margin-bottom:15px;
+}
+
+.login-box h2{color:#174a35;margin-bottom:5px}
+.login-box p{color:#77847c;font-size:13px;margin-bottom:25px}
+
+.field{
+    width:100%;
+    padding:13px;
+    border:1px solid #dce5de;
+    border-radius:10px;
+    margin-bottom:14px;
+    outline:none;
+    background:#fbfcfb;
+}
+
+.field:focus{border-color:#287453}
+
+.green-btn{
+    background:#17603f;
+    color:white;
+    border:0;
+    padding:12px 18px;
+    border-radius:10px;
+    font-weight:700;
+}
+
+.green-btn:hover{background:#267a52}
+.green-btn:disabled{opacity:.6;cursor:not-allowed}
+.login-box .green-btn{width:100%}
+
+.error{color:#c0392b;font-size:13px;margin-top:12px}
+
+#dashboard{display:none}
+
+.layout{display:flex;min-height:100vh}
+
+.sidebar{
+    width:245px;
+    background:#123d2d;
+    color:white;
+    padding:22px 15px;
+    flex-shrink:0;
+}
+
+.sidebar-brand{
+    text-align:center;
+    padding:10px 0 25px;
+    border-bottom:1px solid #ffffff20;
+}
+
+.sidebar-brand img{
+    width:75px;
+    height:75px;
+    object-fit:contain;
+    background:white;
+    border-radius:15px;
+    padding:5px;
+}
+
+.sidebar-brand h3{margin-top:8px}
+
+.sidebar button{
+    display:block;
+    width:100%;
+    text-align:right;
+    padding:13px 15px;
+    border:0;
+    background:transparent;
+    color:#e5f0e8;
+    border-radius:9px;
+    margin-top:8px;
+}
+
+.sidebar button:hover,
+.sidebar button.active{
+    background:#286749;
+    color:white;
+}
+
+.sidebar .logout{margin-top:35px;color:#ffd2c9}
+
+.main{flex:1;min-width:0;padding:25px}
+
+.topbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    flex-wrap:wrap;
+    margin-bottom:25px;
+}
+
+.topbar h1{font-size:24px;color:#174a35}
+.topbar span{color:#77847c;font-size:13px}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:16px;
+    margin-bottom:25px;
+}
+
+.stat{
+    background:white;
+    padding:20px;
+    border-radius:15px;
+    box-shadow:0 4px 15px #123d2d0b;
+    border:1px solid #e8eee9;
+}
+
+.stat .emoji{font-size:27px}
+.stat h3{font-size:25px;color:#174a35;margin-top:8px}
+.stat p{color:#7b8980;font-size:13px}
+
+.panel{
+    display:none;
+    background:white;
+    padding:22px;
+    border-radius:15px;
+    box-shadow:0 4px 18px #123d2d0b;
+    margin-bottom:20px;
+}
+
+.panel.active{display:block}
+.panel h2{font-size:20px;color:#174a35;margin-bottom:18px}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:13px;
+}
+
+.form-grid label{
+    font-size:13px;
+    color:#52635a;
+    display:block;
+    margin-bottom:5px;
+}
+
+.form-grid input,
+.form-grid select{
+    width:100%;
+    padding:11px;
+    border:1px solid #dce5de;
+    border-radius:9px;
+    outline:none;
+    background:white;
+}
+
+.form-grid input:focus,
+.form-grid select:focus{border-color:#287453}
+
+.form-actions{
+    margin-top:16px;
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.secondary-btn{
+    border:1px solid #dce5de;
+    background:#f7faf7;
+    padding:11px 17px;
+    border-radius:9px;
+}
+
+.table-wrap{overflow-x:auto}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:650px;
+}
+
+th,td{
+    text-align:right;
+    padding:12px;
+    border-bottom:1px solid #edf0ed;
+    font-size:13px;
+}
+
+th{background:#f3f7f3;color:#174a35}
+
+td button{
+    border:0;
+    border-radius:7px;
+    padding:7px 10px;
+    margin:2px;
+}
+
+.edit-btn{background:#e7f1eb;color:#17603f}
+.delete-btn{background:#fff0ed;color:#c0392b}
+
+.empty{text-align:center;padding:25px;color:#89958d}
+
+.notice{
+    background:#fff8e7;
+    color:#82621b;
+    padding:13px;
+    border-radius:10px;
+    margin-bottom:18px;
+    font-size:13px;
+}
+
+.summary{
+    background:#f5f8f5;
+    border-radius:12px;
+    padding:17px;
+    margin-top:15px;
+    line-height:2;
+}
+
+/* انتخاب و پیش‌نمایش عکس کتاب */
+
+.image-upload-box{
+    grid-column:1/-1;
+    background:#f7faf7;
+    border:1px dashed #a9c5b2;
+    border-radius:13px;
+    padding:17px;
+}
+
+.image-upload-box label{font-weight:700;color:#174a35}
+
+.image-upload-row{
+    display:flex;
+    align-items:center;
+    gap:18px;
+    flex-wrap:wrap;
+}
+
+.image-preview{
+    width:135px;
+    height:175px;
+    background:white;
+    border:1px solid #dce5de;
+    border-radius:10px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+    color:#8a988f;
+    text-align:center;
+    font-size:12px;
+    padding:8px;
+}
+
+.image-preview img{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    display:none;
+}
+
+.image-controls{flex:1;min-width:200px}
+
+.image-controls input[type=file]{
+    width:100%;
+    padding:10px;
+    background:white;
+    border:1px solid #dce5de;
+    border-radius:9px;
+}
+
+.image-help{
+    font-size:12px;
+    color:#78867d;
+    margin-top:9px;
+    line-height:1.9;
+}
+
+.remove-image-btn{
+    margin-top:10px;
+    background:#fff0ed;
+    color:#c0392b;
+    border:0;
+    border-radius:8px;
+    padding:9px 13px;
+}
+
+.book-thumb{
+    width:43px;
+    height:55px;
+    object-fit:cover;
+    border-radius:5px;
+    border:1px solid #e5eae6;
+}
+
+/* بخش تغییر رمز عبور */
+
+.password-box{
+    max-width:500px;
+    background:linear-gradient(135deg,#f1f8f3,#ffffff);
+    border:1px solid #dcebe0;
+    border-radius:14px;
+    padding:20px;
+    margin-top:20px;
+}
+
+.password-box h3{
+    color:#174a35;
+    margin-bottom:18px;
+}
+
+.password-box label{
+    display:block;
+    font-size:13px;
+    color:#52635a;
+    margin-bottom:6px;
+}
+
+.password-box .field{margin-bottom:15px}
+
+.password-message{
+    font-size:13px;
+    margin-top:13px;
+    font-weight:600;
+}
+
+@media(max-width:900px){
+    .stats{grid-template-columns:repeat(2,1fr)}
+    .sidebar{width:190px}
+}
+
+@media(max-width:600px){
+    .layout{display:block}
+    .sidebar{width:100%;padding:12px}
+
+    .sidebar-brand{
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        gap:12px;
+        padding:5px;
+    }
+
+    .sidebar-brand img{width:45px;height:45px}
+
+    .sidebar button{
+        display:inline-block;
+        width:auto;
+        margin:5px 2px;
+        padding:9px;
+        font-size:12px;
+    }
+
+    .sidebar .logout{margin-top:5px}
+    .main{padding:15px}
+    .form-grid{grid-template-columns:1fr}
+    .topbar h1{font-size:20px}
+    .image-upload-box{grid-column:1}
+    .password-box{padding:15px}
+}
+</style>
+</head>
+
+<body>
+
+<!-- صفحه ورود -->
+
+<div class="login-screen" id="loginScreen">
+    <div class="login-box">
+        <img src="images/logo.png" alt="لوگوی کتاب احسان">
+        <h2>پنل مدیریت</h2>
+        <p>کتاب احسان کابل</p>
+
+        <input class="field" id="username" placeholder="نام کاربری" autocomplete="username">
+
+        <input class="field" id="password" type="password" placeholder="رمز عبور" autocomplete="current-password">
+
+        <button class="green-btn" onclick="login()">ورود به پنل مدیریت</button>
+
+        <div class="error" id="loginError"></div>
+    </div>
+</div>
+
+<!-- داشبورد -->
+
+<div id="dashboard">
+<div class="layout">
+
+<aside class="sidebar">
+
+    <div class="sidebar-brand">
+        <img src="images/logo.png" alt="لوگو">
+        <h3>کتاب احسان کابل</h3>
+    </div>
+
+    <button class="active" onclick="showPanel('home',this)">🏠 داشبورد اصلی</button>
+    <button onclick="showPanel('books',this)">📚 مدیریت کتاب‌ها</button>
+    <button onclick="showPanel('addBook',this)">➕ افزودن کتاب</button>
+    <button onclick="showPanel('categories',this)">🗂️ دسته‌بندی‌ها</button>
+    <button onclick="showPanel('orders',this)">🛒 سفارش‌ها</button>
+    <button onclick="showPanel('settings',this)">⚙️ تنظیمات</button>
+    <button class="logout" onclick="logout()">🚪 خروج از پنل</button>
+
+</aside>
+
+<main class="main">
+
+    <div class="topbar">
+        <div>
+            <h1>داشبورد مدیریت</h1>
+            <span>به پنل مدیریت کتاب احسان کابل خوش آمدید</span>
+        </div>
+        <span id="today"></span>
+    </div>
+
+    <!-- داشبورد اصلی -->
+
+    <section class="panel active" id="home">
+
+        <h2>نمای کلی فروشگاه</h2>
+
+        <div class="stats">
+
+            <div class="stat">
+                <div class="emoji">📚</div>
+                <h3 id="totalBooks">0</h3>
+                <p>تعداد کتاب‌ها</p>
+            </div>
+
+            <div class="stat">
+                <div class="emoji">🗂️</div>
+                <h3 id="totalCategories">0</h3>
+                <p>دسته‌بندی‌ها</p>
+            </div>
+
+            <div class="stat">
+                <div class="emoji">🛒</div>
+                <h3 id="totalOrders">0</h3>
+                <p>سفارش‌های ثبت‌شده در این مرورگر</p>
+            </div>
+
+            <div class="stat">
+                <div class="emoji">💰</div>
+                <h3 id="totalValue">0</h3>
+                <p>ارزش مجموع کتاب‌ها (افغانی)</p>
+            </div>
+
+        </div>
+
+        <div class="notice">
+            توجه: این پنل در نسخه فعلی به‌صورت محلی کار می‌کند. اطلاعات در مرورگر همین دستگاه ذخیره می‌شود و هنوز دیتابیس آنلاین ندارد.
+        </div>
+
+        <div class="summary">
+            <strong>مدیریت فروشگاه:</strong><br>
+            از منوی سمت راست می‌توانی کتاب اضافه کنی، اطلاعات کتاب‌ها را ویرایش کنی و کتاب‌های غیرضروری را حذف کنی.
+        </div>
+
+    </section>
+
+    <!-- مدیریت کتاب‌ها -->
+
+    <section class="panel" id="books">
+
+        <h2>📚 فهرست کتاب‌ها</h2>
+
+        <input class="field" id="bookSearch" placeholder="جستجوی کتاب..." oninput="renderBooks()" style="max-width:400px">
+
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>تصویر</th>
+                        <th>نام کتاب</th>
+                        <th>نویسنده</th>
+                        <th>دسته‌بندی</th>
+                        <th>قیمت</th>
+                        <th>عملیات</th>
+                    </tr>
+                </thead>
+
+                <tbody id="booksTable"></tbody>
+            </table>
+        </div>
+
+    </section>
+
+    <!-- افزودن کتاب -->
+
+    <section class="panel" id="addBook">
+
+        <h2 id="formTitle">➕ افزودن کتاب جدید</h2>
+
+        <div class="form-grid">
+
+            <div>
+                <label>نام کتاب</label>
+                <input id="bookTitle" placeholder="نام کتاب">
+            </div>
+
+            <div>
+                <label>نام نویسنده</label>
+                <input id="bookAuthor" placeholder="نام نویسنده">
+            </div>
+
+            <div>
+                <label>دسته‌بندی</label>
+                <select id="bookCategory"></select>
+            </div>
+
+            <div>
+                <label>قیمت به افغانی</label>
+                <input id="bookPrice" type="number" min="0" placeholder="مثلاً 250">
+            </div>
+
+            <div>
+                <label>برچسب کتاب</label>
+                <input id="bookBadge" placeholder="مثلاً تازه یا پرفروش">
+            </div>
+
+            <div>
+                <label>نشانی تصویر کتاب (اختیاری)</label>
+                <input id="bookImage" placeholder="images/book1.jpg">
+            </div>
+
+            <div class="image-upload-box">
+
+                <label>🖼️ انتخاب عکس جلد کتاب از کمپیوتر</label>
+
+                <div class="image-upload-row">
+
+                    <div class="image-preview" id="imagePreview">
+                        <span id="previewText">هنوز عکسی انتخاب نشده است</span>
+                        <img id="previewImg" alt="پیش‌نمایش جلد کتاب">
+                    </div>
+
+                    <div class="image-controls">
+
+                        <input type="file" id="bookImageFile" accept="image/*">
+
+                        <div class="image-help">
+                            عکس جلد کتاب را از کمپیوتر انتخاب کن.<br>
+                            عکس به‌صورت خودکار کوچک و فشرده می‌شود.<br>
+                            فرمت‌های JPG، PNG و WebP قابل قبول است.
+                        </div>
+
+                        <button type="button" class="remove-image-btn" onclick="removeSelectedImage()">
+                            حذف عکس انتخاب‌شده
+                        </button>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="form-actions">
+            <button class="green-btn" id="saveBookButton" onclick="saveBook()">💾 ذخیره کتاب</button>
+            <button class="secondary-btn" onclick="resetForm()">پاک‌کردن فرم</button>
+        </div>
+
+    </section>
+
+    <!-- دسته‌بندی‌ها -->
+
+    <section class="panel" id="categories">
+
+        <h2>🗂️ دسته‌بندی‌های فروشگاه</h2>
+
+        <div class="notice">
+            دسته‌بندی‌های پیش‌فرض فروشگاه در این بخش نمایش داده می‌شوند.
+        </div>
+
+        <div id="categoryList"></div>
+
+    </section>
+
+    <!-- سفارش‌ها -->
+
+    <section class="panel" id="orders">
+
+        <h2>🛒 سفارش‌ها</h2>
+
+        <div class="notice">
+            در نسخه فعلی سفارش‌ها از طریق واتساپ ارسال می‌شوند؛ این بخش هنوز به سیستم ثبت سفارش آنلاین متصل نیست.
+        </div>
+
+        <p class="empty">هنوز سفارش آنلاینی در پنل ثبت نشده است.</p>
+
+    </section>
+
+    <!-- تنظیمات -->
+
+    <section class="panel" id="settings">
+
+        <h2>⚙️ تنظیمات پنل</h2>
+
+        <div class="summary">
+
+            <p><strong>نام فروشگاه:</strong> کتاب احسان کابل</p>
+            <p><strong>واحد پول:</strong> افغانی (AFN)</p>
+            <p><strong>شماره واتساپ:</strong> +93 70 001 8312</p>
+            <p><strong>نشانی:</strong> جاده آسمایی، آسمایی پلازا، منزل تحتانی، کابل، افغانستان</p>
+
+        </div>
+
+        <div class="notice" style="margin-top:15px">
+            نام کاربری مدیر: admin
+            <br>
+            رمز اولیه مدیر: 12345
+            <br>
+            پس از ورود می‌توانی رمز عبور را تغییر بدهی.
+        </div>
+
+        <!-- فرم تغییر رمز -->
+
+        <div class="password-box">
+
+            <h3>🔐 تغییر رمز عبور مدیر</h3>
+
+            <label for="currentAdminPassword">رمز عبور فعلی</label>
+            <input class="field" id="currentAdminPassword" type="password" placeholder="رمز فعلی" autocomplete="current-password">
+
+            <label for="newAdminPassword">رمز عبور جدید</label>
+            <input class="field" id="newAdminPassword" type="password" placeholder="حداقل ۶ حرف یا عدد" autocomplete="new-password">
+
+            <label for="confirmAdminPassword">تکرار رمز عبور جدید</label>
+            <input class="field" id="confirmAdminPassword" type="password" placeholder="رمز جدید را دوباره وارد کن" autocomplete="new-password">
+
+            <button class="green-btn" onclick="changeAdminPassword()">
+                🔒 ذخیره رمز جدید
+            </button>
+
+            <p class="password-message" id="passwordChangeMessage"></p>
+
+        </div>
+
+        <div class="notice" style="margin-top:18px">
+            نکته امنیتی: این نسخه آزمایشی است و رمز در مرورگر همین دستگاه ذخیره می‌شود. برای امنیت واقعی و مدیریت آنلاین باید ورود مدیر به سرور و دیتابیس متصل شود.
+        </div>
+
+    </section>
+
+</main>
+</div>
+</div>
+
+<script>
+"use strict";
+
+/* تنظیمات اصلی */
+
+const ADMIN_USER = "admin";
+const DEFAULT_ADMIN_PASS = "12345";
+const ADMIN_PASSWORD_KEY = "ehsan_admin_password";
+const STORAGE_KEY = "ehsan_books";
+
+const CATEGORIES = [
+    "عقاید",
+    "علوم قرآنی",
+    "حدیث و سنت",
+    "خانواده و بانوان",
+    "احکام و آداب",
+    "تزکیه و اخلاق اسلامی",
+    "سیره",
+    "تاریخی",
+    "زندگی‌نامه",
+    "ادبی",
+    "فقه و اصول",
+    "فکر و اندیشه",
+    "کودکان و نوجوانان",
+    "روان‌شناسی",
+    "ادعیه و اذکار",
+    "دعوت و دعوت‌گری",
+    "طب و سلامت",
+    "محصولات جانبی",
+    "گوناگون"
+];
+
+let books = [];
+let editingId = null;
+let selectedImageData = null;
+let imageWasRemoved = false;
+
+/* دریافت رمز عبور مدیر */
+
+function getAdminPassword(){
+    return localStorage.getItem(ADMIN_PASSWORD_KEY) || DEFAULT_ADMIN_PASS;
+}
+
+/* بارگذاری کتاب‌ها */
+
+function loadBooks(){
+    try{
+        books = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+
+        if(!Array.isArray(books)){
+            books = [];
+        }
+
+    }catch(error){
+        books = [];
+    }
+}
+
+/* ذخیره اطلاعات کتاب‌ها */
+
+function saveStorage(){
+    try{
+
+        localStorage.setItem(STORAGE_KEY,JSON.stringify(books));
+
+        updateStats();
+        renderBooks();
+
+        return true;
+
+    }catch(error){
+
+        alert("فضای ذخیره‌سازی مرورگر کافی نیست. لطفاً عکس‌های کوچک‌تری انتخاب کن یا تعدادی از عکس‌های قبلی را حذف کن.");
+
+        return false;
+    }
+}
+
+/* ورود مدیر */
+
+function login(){
+
+    const user = document.getElementById("username").value.trim();
+    const pass = document.getElementById("password").value;
+
+    if(user === ADMIN_USER && pass === getAdminPassword()){
+
+        sessionStorage.setItem("ehsan_admin_logged_in","yes");
+
+        document.getElementById("loginError").textContent = "";
+
+        showDashboard();
+
+    }else{
+
+        document.getElementById("loginError").textContent =
+            "نام کاربری یا رمز عبور نادرست است.";
+
+    }
+}
+
+/* نمایش داشبورد */
+
+function showDashboard(){
+
+    document.getElementById("loginScreen").style.display = "none";
+    document.getElementById("dashboard").style.display = "block";
+
+    loadBooks();
+    fillCategories();
+    updateStats();
+    renderBooks();
+    renderCategoryList();
+
+    document.getElementById("today").textContent =
+        new Date().toLocaleDateString("fa-AF");
+}
+
+/* خروج از پنل */
+
+function logout(){
+
+    sessionStorage.removeItem("ehsan_admin_logged_in");
+
+    location.reload();
+}
+
+/* تغییر رمز عبور مدیر */
+
+function changeAdminPassword(){
+
+    const current = document.getElementById("currentAdminPassword").value;
+    const newPass = document.getElementById("newAdminPassword").value;
+    const confirmPass = document.getElementById("confirmAdminPassword").value;
+
+    const message = document.getElementById("passwordChangeMessage");
+
+    message.style.color = "#c0392b";
+
+    if(!current || !newPass || !confirmPass){
+
+        message.textContent = "لطفاً تمام خانه‌ها را تکمیل کن.";
+        return;
+    }
+
+    if(current !== getAdminPassword()){
+
+        message.textContent = "رمز عبور فعلی اشتباه است.";
+        return;
+    }
+
+    if(newPass.length < 6){
+
+        message.textContent = "رمز جدید باید حداقل ۶ حرف یا عدد داشته باشد.";
+        return;
+    }
+
+    if(newPass !== confirmPass){
+
+        message.textContent = "رمز جدید و تکرار آن یکسان نیست.";
+        return;
+    }
+
+    if(newPass === current){
+
+        message.textContent = "رمز جدید باید با رمز فعلی متفاوت باشد.";
+        return;
+    }
+
+    try{
+
+        localStorage.setItem(ADMIN_PASSWORD_KEY,newPass);
+
+        document.getElementById("currentAdminPassword").value = "";
+        document.getElementById("newAdminPassword").value = "";
+        document.getElementById("confirmAdminPassword").value = "";
+
+        message.style.color = "#17603f";
+        message.textContent = "رمز عبور با موفقیت تغییر کرد.";
+
+        alert("رمز عبور مدیر با موفقیت تغییر کرد.");
+
+    }catch(error){
+
+        message.textContent = "ذخیره رمز جدید ناموفق بود. فضای مرورگر را بررسی کن.";
+
+    }
+}
+
+/* نمایش بخش‌های پنل */
+
+function showPanel(id,button){
+
+    document.querySelectorAll(".panel").forEach(panel=>{
+        panel.classList.remove("active");
+    });
+
+    document.getElementById(id).classList.add("active");
+
+    document.querySelectorAll(".sidebar button").forEach(btn=>{
+        btn.classList.remove("active");
+    });
+
+    if(button){
+        button.classList.add("active");
+    }
+}
+
+/* نمایش دسته‌بندی‌ها در فرم */
+
+function fillCategories(){
+
+    const select = document.getElementById("bookCategory");
+
+    select.innerHTML = CATEGORIES.map(category=>
+        `<option value="${escapeHTML(category)}">${escapeHTML(category)}</option>`
+    ).join("");
+}
+
+/* نمایش فهرست دسته‌بندی‌ها */
+
+function renderCategoryList(){
+
+    document.getElementById("categoryList").innerHTML =
+        CATEGORIES.map(category=>
+            `<div style="display:inline-block;background:#eaf3ec;color:#17603f;padding:10px 15px;border-radius:9px;margin:5px">${escapeHTML(category)}</div>`
+        ).join("");
+}
+
+/* آمار داشبورد */
+
+function updateStats(){
+
+    document.getElementById("totalBooks").textContent = books.length;
+
+    document.getElementById("totalCategories").textContent =
+        new Set(books.map(book=>book.category)).size;
+
+    document.getElementById("totalOrders").textContent = 0;
+
+    const total = books.reduce(
+        (sum,book)=>sum+(Number(book.price)||0),
+        0
+    );
+
+    document.getElementById("totalValue").textContent =
+        total.toLocaleString("en-US");
+}
+
+/* نمایش کتاب‌ها */
+
+function renderBooks(){
+
+    const search = (
+        document.getElementById("bookSearch")?.value || ""
+    ).trim().toLowerCase();
+
+    const filtered = books.filter(book=>
+        [book.title,book.author,book.category].some(value=>
+            String(value||"").toLowerCase().includes(search)
+        )
+    );
+
+    const tbody = document.getElementById("booksTable");
+
+    if(!filtered.length){
+
+        tbody.innerHTML =
+            '<tr><td colspan="6" class="empty">کتابی پیدا نشد.</td></tr>';
+
+        return;
+    }
+
+    tbody.innerHTML = filtered.map(book=>`
+
+        <tr>
+
+            <td>
+                ${book.image
+                    ? `<img class="book-thumb" src="${escapeHTML(book.image)}" alt="جلد کتاب">`
+                    : "—"
+                }
+            </td>
+
+            <td>${escapeHTML(book.title)}</td>
+
+            <td>${escapeHTML(book.author)}</td>
+
+            <td>${escapeHTML(book.category)}</td>
+
+            <td>${Number(book.price).toLocaleString("en-US")} افغانی</td>
+
+            <td>
+
+                <button class="edit-btn" onclick="editBook(${Number(book.id)})">
+                    ویرایش
+                </button>
+
+                <button class="delete-btn" onclick="deleteBook(${Number(book.id)})">
+                    حذف
+                </button>
+
+            </td>
+
+        </tr>
+
+    `).join("");
+}
+
+/* فشرده‌سازی عکس */
+
+function compressImage(file){
+
+    return new Promise((resolve,reject)=>{
+
+        const reader = new FileReader();
+
+        reader.onload = ()=>{
+
+            const img = new Image();
+
+            img.onload = ()=>{
+
+                const maxWidth = 500;
+                const maxHeight = 700;
+
+                let width = img.width;
+                let height = img.height;
+
+                const scale = Math.min(
+                    maxWidth/width,
+                    maxHeight/height,
+                    1
+                );
+
+                width = Math.round(width*scale);
+                height = Math.round(height*scale);
+
+                const canvas = document.createElement("canvas");
+
+                canvas.width = width;
+                canvas.height = height;
+
+                const ctx = canvas.getContext("2d");
+
+                ctx.fillStyle = "#ffffff";
+                ctx.fillRect(0,0,width,height);
+
+                ctx.drawImage(img,0,0,width,height);
+
+                let quality = 0.78;
+
+                let result = canvas.toDataURL("image/jpeg",quality);
+
+                while(result.length > 350000 && quality > 0.40){
+
+                    quality -= 0.07;
+
+                    result = canvas.toDataURL("image/jpeg",quality);
+
+                }
+
+                resolve(result);
+            };
+
+            img.onerror = ()=>reject(
+                new Error("تصویر قابل خواندن نیست.")
+            );
+
+            img.src = reader.result;
+        };
+
+        reader.onerror = ()=>reject(
+            new Error("خواندن فایل تصویر ناموفق بود.")
+        );
+
+        reader.readAsDataURL(file);
+    });
+}
+
+/* پیش‌نمایش عکس */
+
+function showPreview(imageSource){
+
+    const previewImg = document.getElementById("previewImg");
+    const previewText = document.getElementById("previewText");
+
+    if(imageSource){
+
+        previewImg.src = imageSource;
+
+        previewImg.style.display = "block";
+        previewText.style.display = "none";
+
+        previewImg.onerror = ()=>{
+
+            previewImg.style.display = "none";
+            previewText.style.display = "block";
+            previewText.textContent = "نمایش عکس ممکن نیست";
+
+        };
+
+    }else{
+
+        previewImg.removeAttribute("src");
+
+        previewImg.style.display = "none";
+        previewText.style.display = "block";
+
+        previewText.textContent = "هنوز عکسی انتخاب نشده است";
+    }
+}
+
+/* انتخاب عکس از کمپیوتر */
+
+document.getElementById("bookImageFile").addEventListener("change",async function(){
+
+    const file = this.files[0];
+
+    if(!file) return;
+
+    if(!file.type.startsWith("image/")){
+
+        alert("لطفاً یک فایل تصویری انتخاب کن.");
+
+        this.value = "";
+
+        return;
+    }
+
+    if(file.size > 10*1024*1024){
+
+        alert("حجم عکس نباید بیشتر از ۱۰ مگابایت باشد.");
+
+        this.value = "";
+
+        return;
+    }
+
+    try{
+
+        selectedImageData = await compressImage(file);
+
+        imageWasRemoved = false;
+
+        showPreview(selectedImageData);
+
+    }catch(error){
+
+        alert("در خواندن یا آماده‌سازی عکس مشکلی پیش آمد.");
+
+        this.value = "";
+    }
+
+});
+
+/* پیش‌نمایش نشانی عکس */
+
+document.getElementById("bookImage").addEventListener("input",function(){
+
+    if(!selectedImageData && !imageWasRemoved){
+
+        showPreview(this.value.trim());
+
+    }
+
+});
+
+/* حذف عکس انتخاب‌شده */
+
+function removeSelectedImage(){
+
+    selectedImageData = null;
+    imageWasRemoved = true;
+
+    document.getElementById("bookImageFile").value = "";
+    document.getElementById("bookImage").value = "";
+
+    showPreview(null);
+}
+
+/* ذخیره کتاب */
+
+async function saveBook(){
+
+    const title = document.getElementById("bookTitle").value.trim();
+
+    const author = document.getElementById("bookAuthor").value.trim();
+
+    const category = document.getElementById("bookCategory").value;
+
+    const price = Number(document.getElementById("bookPrice").value);
+
+    const badge = document.getElementById("bookBadge").value.trim();
+
+    const imageUrl = document.getElementById("bookImage").value.trim();
+
+    if(!title || !author || !Number.isFinite(price) || price < 0){
+
+        alert("لطفاً نام کتاب، نویسنده و قیمت معتبر را وارد کن.");
+
+        return;
+    }
+
+    const button = document.getElementById("saveBookButton");
+
+    button.disabled = true;
+    button.textContent = "در حال ذخیره...";
+
+    let oldBook = null;
+
+    if(editingId !== null){
+
+        oldBook = books.find(book=>Number(book.id)===editingId);
+
+    }
+
+    let image = "";
+
+    if(selectedImageData){
+
+        image = selectedImageData;
+
+    }else if(imageWasRemoved){
+
+        image = "";
+
+    }else if(imageUrl){
+
+        image = imageUrl;
+
+    }else if(oldBook){
+
+        image = oldBook.image || "";
+
+    }
+
+    const newBook = {
+
+        ...(oldBook || {}),
+
+        id:editingId !== null ? editingId : Date.now(),
+
+        title,
+        author,
+        category,
+        price,
+        badge,
+        image
+    };
+
+    let updatedBooks;
+
+    if(editingId !== null){
+
+        updatedBooks = books.map(book=>
+            Number(book.id)===editingId ? newBook : book
+        );
+
+    }else{
+
+        updatedBooks = [...books,newBook];
+
+    }
+
+    const previousBooks = books;
+
+    books = updatedBooks;
+
+    if(saveStorage()){
+
+        resetForm();
+
+        showPanel(
+            "books",
+            document.querySelectorAll(".sidebar button")[1]
+        );
+
+        alert("کتاب و تصویر آن با موفقیت ذخیره شد.");
+
+    }else{
+
+        books = previousBooks;
+
+    }
+
+    button.disabled = false;
+    button.textContent = "💾 ذخیره کتاب";
+}
+
+/* ویرایش کتاب */
+
+function editBook(id){
+
+    const book = books.find(item=>Number(item.id)===id);
+
+    if(!book) return;
+
+    editingId = id;
+
+    selectedImageData = null;
+    imageWasRemoved = false;
+
+    document.getElementById("bookTitle").value = book.title || "";
+
+    document.getElementById("bookAuthor").value = book.author || "";
+
+    document.getElementById("bookCategory").value =
+        book.category || CATEGORIES[0];
+
+    document.getElementById("bookPrice").value = book.price ?? "";
+
+    document.getElementById("bookBadge").value = book.badge || "";
+
+    document.getElementById("bookImage").value =
+        book.image && !book.image.startsWith("data:image/")
+        ? book.image
+        : "";
+
+    document.getElementById("bookImageFile").value = "";
+
+    document.getElementById("formTitle").textContent = "✏️ ویرایش کتاب";
+
+    showPreview(book.image || "");
+
+    showPanel(
+        "addBook",
+        document.querySelectorAll(".sidebar button")[2]
+    );
+}
+
+/* حذف کتاب */
+
+function deleteBook(id){
+
+    if(!confirm("آیا از حذف این کتاب مطمئن هستی؟")) return;
+
+    const previousBooks = books;
+
+    books = books.filter(book=>Number(book.id)!==id);
+
+    if(!saveStorage()){
+
+        books = previousBooks;
+
+    }
+}
+
+/* پاک‌کردن فرم کتاب */
+
+function resetForm(){
+
+    editingId = null;
+
+    selectedImageData = null;
+
+    imageWasRemoved = false;
+
+    document.getElementById("bookTitle").value = "";
+
+    document.getElementById("bookAuthor").value = "";
+
+    document.getElementById("bookPrice").value = "";
+
+    document.getElementById("bookBadge").value = "";
+
+    document.getElementById("bookImage").value = "";
+
+    document.getElementById("bookImageFile").value = "";
+
+    document.getElementById("formTitle").textContent =
+        "➕ افزودن کتاب جدید";
+
+    showPreview(null);
+}
+
+/* جلوگیری از ورود کد HTML ناخواسته */
+
+function escapeHTML(value){
+
+    return String(value??"").replace(/[&<>"']/g,char=>({
+
+        "&":"&amp;",
+        "<":"&lt;",
+        ">":"&gt;",
+        '"':"&quot;",
+        "'":"&#39;"
+
+    })[char]);
+}
+
+/* راه‌اندازی اولیه */
+
+document.addEventListener("DOMContentLoaded",()=>{
+
+    showPreview(null);
+
+    if(sessionStorage.getItem("ehsan_admin_logged_in")==="yes"){
+
+        showDashboard();
+
+    }
+
+});
+</script>
+
+</body>
+</html>

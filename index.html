@@ -1,0 +1,530 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#104b35">
+
+    <title>کتاب احسان کابل | کتاب‌فروشی آنلاین</title>
+    <meta name="description" content="کتاب احسان کابل؛ فروش آنلاین کتاب‌های دینی، علمی، ادبی و فرهنگی در افغانستان.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- آیکن‌های SVG -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+
+    <symbol id="icon-user" viewBox="0 0 24 24">
+        <circle cx="12" cy="8" r="4"/>
+        <path d="M4 21v-2a8 8 0 0 1 16 0v2"/>
+    </symbol>
+
+    <symbol id="icon-cart" viewBox="0 0 24 24">
+        <path d="M3 3h2l2.5 12h11l3-9H6"/>
+        <circle cx="9" cy="20" r="1"/>
+        <circle cx="18" cy="20" r="1"/>
+    </symbol>
+
+    <symbol id="icon-search" viewBox="0 0 24 24">
+        <circle cx="10.8" cy="10.8" r="7"/>
+        <path d="m16 16 5 5"/>
+    </symbol>
+
+    <symbol id="icon-menu" viewBox="0 0 24 24">
+        <path d="M3 6h18M3 12h18M3 18h18"/>
+    </symbol>
+
+    <symbol id="icon-book" viewBox="0 0 24 24">
+        <path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v17H6.5A2.5 2.5 0 0 0 4 21.5z"/>
+        <path d="M4 4.5v17M8 6h8M8 10h8"/>
+    </symbol>
+
+    <symbol id="icon-truck" viewBox="0 0 24 24">
+        <path d="M2 5h12v13H2zM14 9h5l3 4v5h-8z"/>
+        <circle cx="6.5" cy="19" r="2"/>
+        <circle cx="18" cy="19" r="2"/>
+    </symbol>
+
+    <symbol id="icon-shield" viewBox="0 0 24 24">
+        <path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11z"/>
+        <path d="m9 12 2 2 4-4"/>
+    </symbol>
+
+    <symbol id="icon-headset" viewBox="0 0 24 24">
+        <path d="M3 13v-2a9 9 0 0 1 18 0v2"/>
+        <rect x="3" y="12" width="4" height="7" rx="2"/>
+        <rect x="17" y="12" width="4" height="7" rx="2"/>
+        <path d="M21 18c0 2-2 3-5 3"/>
+    </symbol>
+
+    <symbol id="icon-location" viewBox="0 0 24 24">
+        <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0z"/>
+        <circle cx="12" cy="10" r="2.5"/>
+    </symbol>
+
+    <symbol id="icon-phone" viewBox="0 0 24 24">
+        <path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.4 19.4 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8 10a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.7 2z"/>
+    </symbol>
+
+    <symbol id="icon-message" viewBox="0 0 24 24">
+        <path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8z"/>
+    </symbol>
+
+    <symbol id="icon-close" viewBox="0 0 24 24">
+        <path d="m18 6-12 12M6 6l12 12"/>
+    </symbol>
+
+    <symbol id="icon-arrow" viewBox="0 0 24 24">
+        <path d="M19 12H5M12 19l-7-7 7-7"/>
+    </symbol>
+
+</svg>
+
+<!-- سربرگ -->
+<header class="site-header">
+
+    <div class="container header-main">
+
+        <a class="brand" href="#">
+            <img src="images/logo.png" alt="لوگوی کتاب احسان">
+            <span>کتاب احسان کابل</span>
+        </a>
+
+        <div class="header-search">
+            <input id="searchInput" type="search" placeholder="جستجو در کتاب‌ها...">
+
+            <button type="button" onclick="searchBooks()" aria-label="جستجو">
+                <svg class="icon"><use href="#icon-search"/></svg>
+                <span>جستجو</span>
+            </button>
+        </div>
+
+        <div class="header-actions">
+
+            <button type="button" onclick="openAccount()">
+                <svg class="icon"><use href="#icon-user"/></svg>
+                <span>حساب کاربری</span>
+            </button>
+
+            <button type="button" onclick="openCart()" class="cart-button">
+                <svg class="icon"><use href="#icon-cart"/></svg>
+                <span>سبد خرید</span>
+                <span id="cartCount">0</span>
+            </button>
+
+        </div>
+    </div>
+
+    <nav class="main-nav">
+        <div class="container nav-inner">
+
+            <button class="mobile-menu-button" type="button" onclick="toggleMenu()">
+                <svg class="icon"><use href="#icon-menu"/></svg>
+                منو
+            </button>
+
+            <ul id="navMenu">
+                <li><a href="#">خانه</a></li>
+                <li><a href="#categories">دسته‌بندی کتاب‌ها</a></li>
+                <li><a href="#new-books">کتاب‌های جدید</a></li>
+                <li><a href="#best-books">پرفروش‌ها</a></li>
+                <li><a href="#collections">مجموعه‌ها</a></li>
+                <li><a href="#authors">نویسندگان</a></li>
+                <li><a href="#about">درباره ما</a></li>
+                <li><a href="#contact">تماس با ما</a></li>
+            </ul>
+
+        </div>
+    </nav>
+
+</header>
+
+<main>
+
+    <!-- صفحه اصلی -->
+    <section class="hero">
+
+        <div class="hero-photo"></div>
+
+        <div class="container hero-content">
+
+            <div class="hero-text">
+
+                <span class="hero-label">به کتاب‌فروشی آنلاین ما خوش آمدید</span>
+
+                <h1>کتاب احسان کابل</h1>
+
+                <h2>دنیایی از دانش، معرفت و اندیشه</h2>
+
+                <p>
+                    کتاب‌های ارزشمند دینی، علمی، ادبی و فرهنگی را
+                    در کتاب احسان پیدا کنید.
+                </p>
+
+                <a class="primary-button" href="#categories">
+                    مشاهده کتاب‌ها
+                    <svg class="icon"><use href="#icon-arrow"/></svg>
+                </a>
+
+            </div>
+
+            <div class="hero-image">
+                <img src="images/logo.png" alt="کتاب احسان کابل">
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- خدمات -->
+    <div class="container features">
+
+        <div class="feature-item">
+            <svg class="icon"><use href="#icon-book"/></svg>
+            <span>تنوع کتاب‌ها</span>
+        </div>
+
+        <div class="feature-item">
+            <svg class="icon"><use href="#icon-truck"/></svg>
+            <span>سفارش آسان</span>
+        </div>
+
+        <div class="feature-item">
+            <svg class="icon"><use href="#icon-shield"/></svg>
+            <span>خدمات مطمئن</span>
+        </div>
+
+        <div class="feature-item">
+            <svg class="icon"><use href="#icon-headset"/></svg>
+            <span>پشتیبانی مشتریان</span>
+        </div>
+
+    </div>
+
+    <!-- دسته‌بندی‌ها -->
+    <section class="container section" id="categories">
+
+        <div class="section-heading">
+            <div>
+                <span class="section-kicker">کتاب‌ها را بر اساس موضوع پیدا کنید</span>
+                <h2>دسته‌بندی کتاب‌ها</h2>
+            </div>
+        </div>
+
+        <div class="category-grid" id="categoryGrid"></div>
+
+    </section>
+
+    <!-- کتاب‌های جدید -->
+    <section class="container section" id="new-books">
+
+        <div class="section-heading">
+            <div>
+                <span class="section-kicker">تازه‌ترین کتاب‌های فروشگاه</span>
+                <h2>کتاب‌های جدید</h2>
+            </div>
+        </div>
+
+        <div class="books-grid" id="newBooksGrid"></div>
+
+    </section>
+
+    <!-- پرفروش‌ها -->
+    <section class="container section" id="best-books">
+
+        <div class="section-heading">
+            <div>
+                <span class="section-kicker">انتخاب‌های محبوب خوانندگان</span>
+                <h2>کتاب‌های پرفروش</h2>
+            </div>
+        </div>
+
+        <div class="books-grid" id="bestBooksGrid"></div>
+
+    </section>
+
+    <!-- بنر تبلیغاتی -->
+    <section class="container">
+
+        <div class="promo-banner">
+
+            <div class="promo-copy">
+                <span>کتاب‌خوانی، سرمایه زندگی</span>
+
+                <h2>با کتاب، افق‌های تازه را کشف کنید</h2>
+
+                <p>برای سفارش کتاب مورد علاقه خود با ما تماس بگیرید.</p>
+
+                <a href="https://wa.me/93700018312" target="_blank" rel="noopener">
+                    سفارش از واتساپ
+                    <svg class="icon"><use href="#icon-arrow"/></svg>
+                </a>
+            </div>
+
+            <div class="promo-photo"></div>
+
+        </div>
+
+    </section>
+
+    <!-- مجموعه‌ها -->
+    <section class="container section" id="collections">
+
+        <div class="section-heading">
+            <div>
+                <span class="section-kicker">مطالعه موضوعی</span>
+                <h2>مجموعه‌های ویژه</h2>
+            </div>
+        </div>
+
+        <div class="collection-grid">
+
+            <a href="#new-books" onclick="filterCategory('علوم قرآنی')">
+                <span>علوم قرآنی</span>
+            </a>
+
+            <a href="#new-books" onclick="filterCategory('سیره')">
+                <span>سیره و تاریخ</span>
+            </a>
+
+            <a href="#new-books" onclick="filterCategory('تزکیه و اخلاق اسلامی')">
+                <span>اخلاق اسلامی</span>
+            </a>
+
+            <a href="#new-books" onclick="filterCategory('فقه و اصول')">
+                <span>فقه و اصول</span>
+            </a>
+
+        </div>
+
+    </section>
+
+    <!-- نویسندگان -->
+    <section class="container section" id="authors">
+
+        <div class="section-heading">
+            <div>
+                <span class="section-kicker">چهره‌های برجسته علم و ادب</span>
+                <h2>نویسندگان</h2>
+            </div>
+        </div>
+
+        <div class="author-grid">
+
+            <div>
+                <svg class="icon"><use href="#icon-book"/></svg>
+                <strong>ابن قیم</strong>
+            </div>
+
+            <div>
+                <svg class="icon"><use href="#icon-book"/></svg>
+                <strong>امام غزالی</strong>
+            </div>
+
+            <div>
+                <svg class="icon"><use href="#icon-book"/></svg>
+                <strong>ابوالحسن ندوی</strong>
+            </div>
+
+            <div>
+                <svg class="icon"><use href="#icon-book"/></svg>
+                <strong>یوسف قرضاوی</strong>
+            </div>
+
+            <div>
+                <svg class="icon"><use href="#icon-book"/></svg>
+                <strong>بدیع‌الزمان نورسی</strong>
+            </div>
+
+            <div>
+                <svg class="icon"><use href="#icon-book"/></svg>
+                <strong>مفتی تقی عثمانی</strong>
+            </div>
+
+            <div>
+                <svg class="icon"><use href="#icon-book"/></svg>
+                <strong>ابوالاعلی مودودی</strong>
+            </div>
+
+            <div>
+                <svg class="icon"><use href="#icon-book"/></svg>
+                <strong>ادهم شرقاوی</strong>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- درباره ما -->
+    <section class="about-section" id="about">
+
+        <div class="container about-content">
+
+            <div class="about-photo"></div>
+
+            <div>
+                <span class="section-kicker">معرفی فروشگاه</span>
+
+                <h2>درباره کتاب احسان کابل</h2>
+
+                <p>
+                    کتاب احسان کابل با هدف فراهم‌سازی کتاب‌های ارزشمند
+                    دینی، علمی، ادبی و فرهنگی فعالیت می‌کند.
+                    تلاش ما این است که دسترسی به منابع مفید مطالعه را
+                    آسان‌تر سازیم.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- تماس -->
+    <section class="container section" id="contact">
+
+        <div class="section-heading">
+            <div>
+                <span class="section-kicker">با ما در ارتباط باشید</span>
+                <h2>تماس با ما</h2>
+            </div>
+        </div>
+
+        <div class="contact-grid">
+
+            <div>
+                <svg class="icon"><use href="#icon-location"/></svg>
+                <span>آدرس: جاده آسمایی، آسمایی پلازا، منزل تحتانی، کابل، افغانستان</span>
+            </div>
+
+            <div>
+                <svg class="icon"><use href="#icon-phone"/></svg>
+                <span>شماره تماس: +93 70 001 8312</span>
+            </div>
+
+            <a href="https://wa.me/93700018312" target="_blank" rel="noopener">
+                <svg class="icon"><use href="#icon-message"/></svg>
+                ارتباط از طریق واتساپ
+            </a>
+
+            <a href="https://wa.me/93700018312" target="_blank" rel="noopener">
+                <svg class="icon"><use href="#icon-cart"/></svg>
+                ثبت سفارش کتاب
+            </a>
+
+        </div>
+
+    </section>
+
+</main>
+
+<!-- پایین سایت -->
+<footer class="site-footer">
+
+    <div class="container footer-content">
+
+        <div class="footer-brand">
+            <img src="images/logo.png" alt="لوگوی کتاب احسان">
+            <h3>کتاب احسان کابل</h3>
+            <p>گامی برای گسترش فرهنگ مطالعه و دانش.</p>
+        </div>
+
+        <div>
+            <h3>دسترسی سریع</h3>
+            <a href="#">خانه</a>
+            <a href="#categories">دسته‌بندی‌ها</a>
+            <a href="#new-books">کتاب‌ها</a>
+        </div>
+
+        <div>
+            <h3>ارتباط با ما</h3>
+            <a href="https://wa.me/93700018312">واتساپ</a>
+            <a href="#contact">آدرس فروشگاه</a>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        © کتاب احسان کابل - تمامی حقوق محفوظ است.
+    </div>
+
+</footer>
+
+<!-- واتساپ شناور -->
+<a class="whatsapp-float"
+   href="https://wa.me/93700018312"
+   target="_blank"
+   rel="noopener"
+   aria-label="واتساپ">
+
+    <svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true">
+        <path d="M16 .8A15 15 0 0 0 3.1 23.5L1 31l7.7-2A15.1 15.1 0 1 0 16 .8zm0 27.4a12.3 12.3 0 0 1-6.3-1.7l-.5-.3-4.6 1.2 1.2-4.5-.3-.5A12.3 12.3 0 1 1 16 28.2zm6.8-9.2c-.4-.2-2.1-1-2.5-1.1-.3-.1-.6-.2-.8.2-.3.4-.9 1.1-1.1 1.3-.2.3-.4.3-.8.1-2.2-1.1-3.7-2-5.2-4.5-.4-.7.4-.7 1.1-2 .1-.3 0-.5-.1-.7-.1-.2-.8-2-1.1-2.7-.3-.7-.6-.6-.8-.6h-.7c-.3 0-.7.1-1 .5-.4.4-1.3 1.3-1.3 3.1s1.3 3.5 1.5 3.7c.2.3 2.6 4 6.3 5.6 2.3 1 3.2 1.1 4.3.9.7-.1 2.1-.9 2.4-1.8.3-.9.3-1.7.2-1.8-.1-.1-.3-.2-.6-.3z"/>
+    </svg>
+
+</a>
+
+<!-- سبد خرید -->
+<div class="modal" id="cartModal">
+
+    <div class="modal-content">
+
+        <button class="modal-close" type="button" onclick="closeCart()" aria-label="بستن">
+            <svg class="icon"><use href="#icon-close"/></svg>
+        </button>
+
+        <h2>
+            <svg class="icon"><use href="#icon-cart"/></svg>
+            سبد خرید
+        </h2>
+
+        <div id="cartItems"></div>
+
+        <div id="cartTotal">مجموع: ۰ افغانی</div>
+
+        <button class="primary-button checkout-button"
+                type="button"
+                onclick="checkoutWhatsApp()">
+            ثبت سفارش در واتساپ
+        </button>
+
+    </div>
+
+</div>
+
+<!-- حساب کاربری -->
+<div class="modal" id="accountModal">
+
+    <div class="modal-content">
+
+        <button class="modal-close" type="button" onclick="closeAccount()" aria-label="بستن">
+            <svg class="icon"><use href="#icon-close"/></svg>
+        </button>
+
+        <h2>
+            <svg class="icon"><use href="#icon-user"/></svg>
+            حساب کاربری
+        </h2>
+
+        <p>برای ثبت سفارش یا دریافت معلومات با فروشگاه تماس بگیرید.</p>
+
+        <a class="primary-button"
+           href="https://wa.me/93700018312"
+           target="_blank"
+           rel="noopener">
+            تماس با فروشگاه
+        </a>
+
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>

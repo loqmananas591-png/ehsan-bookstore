@@ -1,0 +1,148 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>جزئیات کتاب | کتاب احسان کابل</title>
+    <meta name="description" content="مشاهده مشخصات و خرید کتاب از کتاب‌فروشی آنلاین احسان کابل">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="header">
+        <div class="container header-content">
+
+<a href="index.html" class="logo">
+    <img src="images/logo.png" alt="لوگوی کتاب احسان کابل">
+    <span>
+        <strong>کتاب احسان کابل</strong>
+        <small>کتاب‌فروشی آنلاین کابل</small>
+    </span>
+</a>
+
+            </a>
+
+            <nav class="navbar">
+                <a href="index.html">صفحه اصلی</a>
+                <a href="index.html#books">کتاب‌ها</a>
+                <a href="index.html#about">درباره ما</a>
+                <a href="index.html#contact">تماس با ما</a>
+            </nav>
+
+            <a href="index.html?showCart=1" class="cart-button">
+                🛒 سبد خرید
+                <span id="cartCount">0</span>
+            </a>
+
+        </div>
+    </header>
+
+    <main class="book-details-section">
+        <div class="container">
+
+            <a href="index.html" class="back-button">
+                ← بازگشت به صفحه اصلی
+            </a>
+
+            <div id="bookDetails" class="book-details">
+                <p>در حال بارگذاری معلومات کتاب...</p>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>© 2026 کتاب احسان کابل | تمامی حقوق محفوظ است.</p>
+        </div>
+    </footer>
+
+    <script>
+        const books = [
+            { id: 1, title: "قرآن کریم", author: "کلام الله مجید", category: "دینی", price: 250, image: "images/quran.jpg", description: "کتاب آسمانی مسلمانان و راهنمای زندگی انسان‌ها." },
+            { id: 2, title: "ریاض الصالحین", author: "امام نووی", category: "دینی", price: 350, image: "images/riyaz.jpg", description: "مجموعه‌ای ارزشمند از احادیث پیامبر اسلام صلی الله علیه وسلم." },
+            { id: 3, title: "تفسیر ابن کثیر", author: "امام ابن کثیر", category: "دینی", price: 700, image: "images/tafsir.jpg", description: "یکی از تفاسیر مشهور و معتبر قرآن کریم." },
+            { id: 4, title: "گلستان سعدی", author: "سعدی شیرازی", category: "ادبی", price: 300, image: "images/golestan.jpg", description: "یکی از آثار برجسته ادبیات فارسی." },
+            { id: 5, title: "شاهنامه", author: "فردوسی", category: "ادبی", price: 500, image: "images/shahnameh.jpg", description: "اثر بزرگ حماسی و ادبی فردوسی." },
+            { id: 6, title: "تاریخ افغانستان", author: "نویسنده مختلف", category: "تاریخی", price: 450, image: "images/history.jpg", description: "کتابی درباره تاریخ و رویدادهای افغانستان." },
+            { id: 7, title: "آموزش برنامه‌نویسی", author: "گروه نویسندگان", category: "علمی", price: 400, image: "images/programming.jpg", description: "آشنایی با مفاهیم ابتدایی برنامه‌نویسی." },
+            { id: 8, title: "فیزیک عمومی", author: "گروه نویسندگان", category: "علمی", price: 380, image: "images/physics.jpg", description: "آشنایی با مفاهیم و قوانین بنیادی فیزیک." }
+        ];
+
+        const params = new URLSearchParams(window.location.search);
+        const bookId = Number(params.get("id"));
+
+        const book = books.find(item => item.id === bookId);
+
+        const bookDetails = document.getElementById("bookDetails");
+        const cartCount = document.getElementById("cartCount");
+
+        let cart = JSON.parse(localStorage.getItem("ehsan_cart")) || [];
+
+        function updateCartCount() {
+            cartCount.textContent = cart.reduce(
+                (total, item) => total + item.quantity, 0
+            );
+        }
+
+        function addToCart(id) {
+            const existing = cart.find(item => item.id === id);
+
+            if (existing) {
+                existing.quantity++;
+            } else {
+                cart.push({ id: id, quantity: 1 });
+            }
+
+            localStorage.setItem("ehsan_cart", JSON.stringify(cart));
+
+            updateCartCount();
+
+            alert("کتاب با موفقیت به سبد خرید اضافه شد.");
+        }
+
+        if (book) {
+            bookDetails.innerHTML = `
+                <div class="book-details-image">
+                    <img src="${book.image}" alt="${book.title}"
+                         onerror="this.src='images/logo.png.jpg'">
+                </div>
+
+                <div class="book-details-info">
+                    <h1>${book.title}</h1>
+
+                    <p><strong>نویسنده:</strong> ${book.author}</p>
+
+                    <p><strong>دسته‌بندی:</strong> ${book.category}</p>
+
+                    <p class="book-description">${book.description}</p>
+
+                    <h2 class="book-price">
+                        ${book.price.toLocaleString("en-US")} افغانی
+                    </h2>
+
+                    <button class="add-cart-btn"
+                        onclick="addToCart(${book.id})">
+                        افزودن به سبد خرید 🛒
+                    </button>
+
+                    <a href="index.html?showCart=1" class="details-btn">
+                        مشاهده سبد خرید
+                    </a>
+                </div>
+            `;
+        } else {
+            bookDetails.innerHTML = `
+                <h2>کتاب مورد نظر پیدا نشد!</h2>
+                <a href="index.html">بازگشت به صفحه اصلی</a>
+            `;
+        }
+
+        updateCartCount();
+    </script>
+
+</body>
+</html>
